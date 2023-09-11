@@ -1,1 +1,2 @@
-
+-- Selecione todos os títulos de livros na tabela livros
+select titulo FROM livros;

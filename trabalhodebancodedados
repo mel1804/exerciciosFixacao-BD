@@ -14,3 +14,8 @@ select alunos.nome, matriculas.curso
 FROM alunos
 INNER JOIN matriculas ON alunos.id = matriculas.aluno_id
 WHERE curso = "Engenharia de Software";
+
+-- Calcule a receita total gerada por cada produto.
+select produto , SUM(receita) as soma_vendas
+from vendas 
+group by produto;

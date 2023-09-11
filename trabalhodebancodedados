@@ -19,3 +19,9 @@ WHERE curso = "Engenharia de Software";
 select produto , SUM(receita) as soma_vendas
 from vendas 
 group by produto;
+
+-- Determine o número total de livros por autor.
+select autores.nome , count(autor_id) as total_livros
+from autores
+inner join livros on autores.id = livros.autor_id
+group by nome;

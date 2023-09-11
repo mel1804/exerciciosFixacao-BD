@@ -8,3 +8,9 @@ where nascimento < '1900-01-01';
 -- Liste todos os livros escritos por 'J.K. Rowling'.
 select titulo FROM livros 
 where autor_id = 1;
+
+-- Encontre todos os alunos matriculados em 'Engenharia de Software'.
+select alunos.nome, matriculas.curso
+FROM alunos
+INNER JOIN matriculas ON alunos.id = matriculas.aluno_id
+WHERE curso = "Engenharia de Software";

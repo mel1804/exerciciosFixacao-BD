@@ -96,3 +96,10 @@ select alunos.nome as aluno, count(matriculas.id) as total_matriculas
 from alunos
 left join matriculas ON alunos.id = matriculas.aluno_id
 group by alunos.id, alunos.nome;
+
+-- Identifique o produto mais vendido com base na quantidade de transações (não na receita).
+select produto
+from vendas
+group by produto
+order by count (*) desc
+limit 1;

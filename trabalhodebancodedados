@@ -64,3 +64,9 @@ left join matriculas ON alunos.id = matriculas.aluno_id;
 select autores.nome as autor, IFNULL(livros.titulo, 'Nenhum livro publicado') as livro
 from autores
 left join livros ON autores.id = livros.autor_id;
+
+-- Com RIGHT JOIN, liste todos os cursos e alunos, mesmo que o curso não tenha nenhum aluno matriculado.
+select cursos.curso, ifnull(alunos.nome, 'Nenhum aluno matriculado') as aluno
+from cursos
+right join matriculas ON cursos.curso = matriculas.curso
+left join alunos ON matriculas.aluno_id = alunos.id;

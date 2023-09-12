@@ -54,3 +54,8 @@ having count (livros.id) > 2;
 select livros.titulo, autores.nome as autor
 from livros
 inner join autores ON livros.autor_id = autores.id;
+
+-- Liste todos os alunos e os cursos em que estão matriculados.
+select alunos.nome as aluno, matriculas.curso
+from alunos
+left join matriculas ON alunos.id = matriculas.aluno_id;

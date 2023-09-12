@@ -36,3 +36,9 @@ select produto, avg(receita) as media_receita
 from vendas
 group by produto;
 order by produto;
+
+-- Encontre os produtos que geraram uma receita total superior a $10.000.
+select produto
+from vendas
+group by produto
+having sum(receita) > 10000.00;

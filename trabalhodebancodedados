@@ -83,3 +83,10 @@ left join livros ON autores.id = livros.autor_id
 group by autores.id, autores.nome
 order by quantidade_de_livros desc
 limit 1;
+
+-- Determine o produto que gerou a menor receita.
+select produto
+from vendas
+group by produto
+order by sum (receita) asc
+limit 1;

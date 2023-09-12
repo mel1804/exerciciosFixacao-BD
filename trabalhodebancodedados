@@ -90,3 +90,9 @@ from vendas
 group by produto
 order by sum (receita) asc
 limit 1;
+
+-- Determine o número total de matrículas para cada aluno.
+select alunos.nome as aluno, count(matriculas.id) as total_matriculas
+from alunos
+left join matriculas ON alunos.id = matriculas.aluno_id
+group by alunos.id, alunos.nome;

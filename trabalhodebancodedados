@@ -30,3 +30,9 @@ group by nome;
 select curso, COUNT(*) as total_alunos
 from matriculas
 group by curso;
+
+-- Liste a média de receita para cada produto.
+select produto, avg(receita) as media_receita
+from vendas
+group by produto;
+order by produto;

@@ -49,3 +49,8 @@ from autores
 inner join livros ON autores.id = livros.autor_id
 group by autores.id, autores.nome
 having count (livros.id) > 2;
+
+-- Junte as tabelas livros e autores e selecione todos os livros com seus respectivos autores.
+select livros.titulo, autores.nome as autor
+from livros
+inner join autores ON livros.autor_id = autores.id;

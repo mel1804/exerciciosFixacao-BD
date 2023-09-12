@@ -70,3 +70,8 @@ select cursos.curso, ifnull(alunos.nome, 'Nenhum aluno matriculado') as aluno
 from cursos
 right join matriculas ON cursos.curso = matriculas.curso
 left join alunos ON matriculas.aluno_id = alunos.id;
+
+-- Utilizando INNER JOIN, mostre somente os alunos e cursos que possuem correspondência mútua.
+select alunos.nome as aluno, matriculas.curso
+from alunos
+inner join matriculas ON alunos.id = matriculas.aluno_id;

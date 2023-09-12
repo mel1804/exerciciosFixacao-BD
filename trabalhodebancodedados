@@ -42,3 +42,10 @@ select produto
 from vendas
 group by produto
 having sum(receita) > 10000.00;
+
+-- Determine os autores que têm mais de 2 livros publicados.
+select autores.nome
+from autores
+inner join livros ON autores.id = livros.autor_id
+group by autores.id, autores.nome
+having count (livros.id) > 2;

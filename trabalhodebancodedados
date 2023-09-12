@@ -59,3 +59,8 @@ inner join autores ON livros.autor_id = autores.id;
 select alunos.nome as aluno, matriculas.curso
 from alunos
 left join matriculas ON alunos.id = matriculas.aluno_id;
+
+-- Usando LEFT JOIN, selecione todos os autores e seus livros, incluindo autores que não têm livros publicados.
+select autores.nome as autor, IFNULL(livros.titulo, 'Nenhum livro publicado') as livro
+from autores
+left join livros ON autores.id = livros.autor_id;

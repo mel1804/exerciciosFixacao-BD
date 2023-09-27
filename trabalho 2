@@ -24,3 +24,19 @@ END;
 DELIMITER ;
 
 CALL sp_LivrosPorCategoria('Romance');
+
+
+-- terceiro exercício
+DELIMITER //
+CREATE PROCEDURE sp_ContarLivrosPorCategoria(IN nome_categoria VARCHAR(50))
+BEGIN
+	SELECT c.Nome, COUNT(l.Titulo) AS quantidade_livros
+    FROM Livro l
+    INNER JOIN Categoria c ON l.Categoria_ID = c.Categoria_ID
+    WHERE c.Nome = nome_categoria
+    GROUP BY c.Nome;
+END;
+//
+DELIMITER ;
+
+CALL sp_ContarLivrosPorCategoria('História');

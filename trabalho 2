@@ -92,3 +92,26 @@ END;
 DELIMITER ;
 
 CALL sp_TitulosPorCategoria('História');
+
+
+-- sétimo exercício 
+DELIMITER //
+CREATE PROCEDURE sp_AdicionarLivro(IN nome_livro VARCHAR(80))
+BEGIN
+	DECLARE por_livros INT;
+   
+    SELECT l.Livro_ID 
+    INTO por_livros
+    FROM Livro l
+    WHERE l.Titulo = nome_livro;
+    
+    IF por_livros IS NOT NULL THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Livro existente.';
+	ELSE
+		INSERT INTO Livro (Titulo)
+		VALUES (nome_livro);
+	END IF;
+END;
+//
+DELIMITER ;

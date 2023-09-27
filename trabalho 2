@@ -78,3 +78,17 @@ END;
 DELIMITER ;
 
 CALL sp_LivrosAteAno(2010);
+
+-- sexto exercício
+DELIMITER //
+CREATE PROCEDURE sp_TitulosPorCategoria(IN nome_categoria VARCHAR(50))
+BEGIN
+	SELECT l.Titulo
+    FROM Livro l
+    INNER JOIN Categoria c ON l.Categoria_ID = c.Categoria_ID
+    WHERE c.Nome = nome_categoria;
+END;
+//
+DELIMITER ;
+
+CALL sp_TitulosPorCategoria('História');

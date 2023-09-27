@@ -5,3 +5,7 @@ BEGIN
 	SELECT Nome, Sobrenome
     FROM Autor;
 END;
+//
+DELIMITER ;
+
+CALL sp_ListarAutores();

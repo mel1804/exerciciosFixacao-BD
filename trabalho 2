@@ -119,3 +119,19 @@ DELIMITER ;
 CALL sp_AdicionarLivro('As Vantagens de Ser Invisível');
 SELECT l.Titulo FROM Livro l;
 
+
+-- oitavo exercício
+DELIMITER //
+CREATE PROCEDURE sp_autorAntigo()
+BEGIN
+	SELECT Nome, Sobrenome
+    FROM Autor
+    WHERE Data_Nascimento = (
+		SELECT MIN(Data_Nascimento)
+        FROM Autor
+	);
+END;
+//
+DELIMITER ;
+
+CALL sp_autorAntigo();

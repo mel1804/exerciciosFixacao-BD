@@ -65,3 +65,16 @@ DELIMITER ;
 
 CALL sp_VerificarLivrosCategoria('Romance', @possui_livros);
 SELECT @possui_livros;
+
+-- quinto exercício
+DELIMITER //
+CREATE PROCEDURE sp_LivrosAteAno(IN ano INT)
+BEGIN
+	SELECT l.Titulo, l.Ano_Publicacao
+	FROM Livro l
+	WHERE l.Ano_Publicacao < ano
+END;
+//
+DELIMITER ;
+
+CALL sp_LivrosAteAno(2010);

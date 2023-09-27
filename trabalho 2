@@ -115,3 +115,7 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+CALL sp_AdicionarLivro('As Vantagens de Ser Invisível');
+SELECT l.Titulo FROM Livro l;
+

@@ -40,3 +40,28 @@ END;
 DELIMITER ;
 
 CALL sp_ContarLivrosPorCategoria('História');
+
+-- quarto exercício
+DELIMITER //
+CREATE PROCEDURE sp_VerificarLivrosCategoria(IN nome_categoria VARCHAR(50), OUT possui_livros ENUM('possui', 'não possui'))
+BEGIN
+    DECLARE quantidade_livros INT;
+
+	SELECT COUNT(l.Categoria_ID) AS quantidade_livros
+    INTO quantidade_livros
+    FROM Categoria c
+    INNER JOIN Livro l ON c.Categoria_ID = l.Categoria_ID
+    WHERE c.Nome = nome_categoria
+    GROUP BY c.Nome;
+   
+    IF quantidade_livros > 0 THEN
+		SET possui_livros = 'possui';
+	ELSE
+		SET possui_livros = 'não possui';
+	END IF;
+END;
+//
+DELIMITER ;
+
+CALL sp_VerificarLivrosCategoria('Romance', @possui_livros);
+SELECT @possui_livros;

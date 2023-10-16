@@ -1,0 +1,202 @@
+create database ex_fixacao;
+use ex_fixacao;
+
+-- primeiro exercício
+-- A
+create table nomes (
+  nome varchar(100)
+);
+
+insert into nomes (nome) values
+('Roberta'),
+('Roberto'),
+('Maria Clara'),
+('João');
+
+-- B
+  select upper(nome) as nomes from nomes;
+
+-- C
+  select length(nome) as tamanho from nomes;
+
+-- D
+select concat('Sr. ', nome) as nome
+from nomes
+where nome like '%O';
+
+select concat('Sra. ', nome) as nome
+from nomes
+where nome like '%A';
+
+-- segundo exercício
+-- A
+create table produtos (
+produto varchar(120),
+  preco decimal(10, 2),
+  quantidade int
+);
+
+insert into produtos values
+('Moletom Roxo', '219.9999', '200'),
+('Regata Verde', '23.9999', '50'),
+('Camiseta Branca Sports', '79.9999', '100'),
+('Boné Feminino', '19.999', '120');
+
+-- B
+select round(preco, 2) as arredondado
+from produtos;
+
+-- C
+select avg(preco) as media from produtos;
+
+-- terceiro exercício
+-- A
+create table eventos (
+  data_evento datetime
+);
+
+insert into eventos values
+('2006-04-18 05:30:20'),
+('2006-06-12 16:14:56'),
+('2008-12-16 21:23:20'),
+('2007-09-21 03:10:44');
+
+-- B
+insert into eventos (data_evento) values
+(now());
+
+select * from eventos;
+
+-- C
+select datediff ('2006-06-12' , '2006-04-18') as diferenca;
+
+-- D
+select dayname('2006-04-18') as dia_da_semana;
+
+-- quarto exercício
+-- A
+
+select
+  produto, preco, quantidade,
+  if(quantidade > 0, 'Em estoque', 'Fora de estoque') as estoque
+from produtos;
+
+-- B
+select
+  produto, preco, quantidade,
+  case
+    when preco < 50.00 then 'Barato'
+    when preco >= 50.00 and preco < 100.00 then 'Médio'
+    else 'Caro'
+  end as categoria
+from produtos;
+
+-- quinto exercício
+-- A
+delimiter //
+create function total_valor(preco decimal(10, 2), quantidade int) returns decimal(10, 2) deterministic
+begin
+    declare v_total decimal(10, 2);
+    
+    set v_total = preco * quantidade;
+   
+    return v_total;
+end;
+// 
+delimiter ;
+
+select total_valor(36.70, 20) as total;
+
+-- B
+select total_valor(219.9999, 200) as total;
+select total_valor (23.9999, 50) as total;
+select total_valor (79.9999, 100) as total;
+select total_valor (19.9999, 120) as total;
+
+-- sexto_exercício
+-- A
+select count(produto) as total from produtos;
+
+-- B
+select produto, preco
+from produtos
+where preco = (select max(preco) from produtos);
+
+-- C
+select produto, preco
+from produtos
+where preco = (select min(preco) from produtos);
+
+-- D
+select sum(if(quantidade > 0, preco * quantidade, 0)) as soma
+from produtos;
+
+-- sétimo exercício
+-- A
+delimiter //
+create function numero_fatorial(num int) returns int deterministic
+begin
+    declare fat int;
+    set fat = 1;
+    
+    while num > 0 do
+        set fat = fat * num;
+	set num = num - 1;
+    end while;
+    
+    return fat;
+end;
+//
+delimiter ;
+
+select numero_fatorial(4) as fatorial;
+
+-- B
+delimiter //
+create function mat_exponencial (base int, expoente int)
+returns int
+deterministic
+begin
+    declare numero int;
+    set numero = 1;
+
+	while expoente > 0 do
+		set numero = numero * base;
+        set expoente = expoente - 1;
+	end while;
+
+    return numero;
+end;
+//
+delimiter ;
+
+select mat_exponencial(8, 2) as exponencial;
+
+-- C
+delimiter //
+
+create function e_palindromo(palavra varchar(255))
+returns int
+deterministic
+begin
+    declare tamanho int;
+    declare i int;
+    
+    set tamanho = length(palavra);
+    set i = 1;
+    
+    while i <= tamanho / 2 do
+        if substring(palavra, i, 1) != substring(palavra, tamanho - i + 1, 1) then
+            return 0;
+        end if;
+        set i = i + 1;
+    end while;
+    
+    return 1;
+end;
+//
+
+delimiter ;
+
+select e_palindromo('arara') as resultado; 
+select e_palindromo('pera') as resultado; 
